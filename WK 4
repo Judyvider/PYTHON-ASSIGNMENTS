@@ -1,0 +1,44 @@
+Import os
+
+def process_file():
+    """
+    Asks the user for a filename, reads it, modifies the content,
+    and writes the modified content to a new file.
+    Includes robust error handling for common file-related issues.
+    """
+    output_filename = 'modified_output.txt'
+
+    input_filename = input("Please enter the name of the file to read: "
+    
+        if not os.path.exists(input_filename):
+            print(f"Error: The file '{input_filename}' does not exist.")
+            return
+
+        with open(input_filename, 'r') as infile:
+            original_content = infile.read()
+        
+        print(f"\nSuccessfully read the file '{input_filename}'.")
+        print("Original content:")
+        print("---")
+        print(original_content)
+        print("---")
+
+        modified_content = original_content.upper()
+
+        with open(output_filename, 'w') as outfile:
+            outfile.write(modified_content)
+
+        print(f"\nSuccessfully wrote the modified content to '{output_filename}'.")
+        print("Modified content:")
+        print("---")
+        print(modified_content)
+        print("---")
+        print("Done!")
+
+    except IOError as e:
+        print(f"An I/O error occurred: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+if __name__ == "__main__":
+    process_file()
